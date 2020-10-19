@@ -1,0 +1,103 @@
+.container {
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+  width: fit-content;
+}
+
+.StatusIco {
+  position: absolute;
+  width: fit-content;
+  top: 30%;
+  right: 3%;
+}
+.PasswordIco {
+  cursor: pointer;
+}
+
+.label {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  line-height: calc(32 / 18);
+}
+
+.input {
+  display: block;
+  box-shadow: inset 0px 0px 0px 2px var(--default);
+  position: relative;
+  padding: 0.625rem 1rem;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  line-height: calc(28 / 18);
+  background-color: var(--white);
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--default-heavy);
+}
+
+.input:focus {
+  box-shadow: inset 0px 0px 0px 2px var(--primary);
+}
+
+.input:disabled {
+  background-color: var(--default);
+}
+
+.input.error {
+  box-shadow: inset 0px 0px 0px 2px var(--error);
+}
+
+.input.success {
+  box-shadow: inset 0px 0px 0px 2px var(--success);
+}
+
+.input.password {
+  background-color: var(--primary);
+}
+
+.input.noBorder {
+  box-shadow: 0px 0px 1px rgba(48, 49, 51, 0.05),
+    0px 1px 3px rgba(48, 49, 51, 0.1);
+}
+
+.multilineText {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-family: 'Inter', sans-serif;
+  border-color: var(--default);
+  border-width: 2px;
+  border-radius: 4px;
+  font-size: 1.125rem;
+  line-height: calc(28 / 18);
+}
+
+.message {
+  font-family: 'Inter', sans-serif;
+  color: var(--default-heavy);
+  line-height: calc(32 / 18);
+  font-size: 1.125rem;
+  margin: 0.5rem 0;
+}
+
+.inputWrapperSearch {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.searchIcon {
+  background-color: var(--primary);
+  width: fit-content;
+  height: 100%;
+  padding: 0.625rem;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+}

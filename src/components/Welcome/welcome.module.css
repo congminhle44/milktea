@@ -1,0 +1,28 @@
+@media only screen and (min-width: 375px) {
+  .welcomeWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .welcomeContent p {
+    font-size: 1.125rem;
+  }
+  .welcomeContent h3 {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .welcomeWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .welcomeContent h3 {
+    font-size: 2.5rem;
+  }
+  .welcomeWrapper .toggleMenu {
+    display: none;
+  }
+}

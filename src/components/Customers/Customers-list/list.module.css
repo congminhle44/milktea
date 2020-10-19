@@ -1,0 +1,83 @@
+@media only screen and (min-width: 320px) {
+  .tablet {
+    display: none;
+  }
+  .rank,
+  .point {
+    display: none;
+  }
+  .customerTable {
+    width: 100%;
+  }
+  .customerTable th {
+    font-size: 0.75rem;
+    line-height: calc(16 / 12);
+    color: var(--default-heavy);
+    text-align: left;
+    padding: 1.5rem 1rem;
+  }
+  .customerTable td {
+    border-top: 1px solid var(--default);
+    border-bottom: 1px solid var(--default);
+    padding: 1rem;
+  }
+  .listInfo {
+    display: flex;
+    align-items: center;
+  }
+  .listInfo img {
+    margin-right: 1.5625rem;
+  }
+
+  .info h5 {
+    font-size: 1rem;
+    line-height: calc(20 / 16);
+    color: #212121;
+    font-family: 'Inter', sans-serif;
+  }
+  .info p {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: #666666;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .loadButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.9375rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .tablet {
+    display: table-cell;
+  }
+  .rank,
+  .point {
+    display: table-cell;
+  }
+  .rankDetail {
+    width: fit-content;
+    padding: 0.5rem 1.1875rem;
+    border-radius: 4px;
+    width: 80px;
+    text-align: center;
+  }
+  .rankDetail.silver {
+    background-color: #d7d7d7;
+  }
+  .rankDetail.gold {
+    background-color: #af9500;
+    color: var(--white);
+  }
+  .rankDetail.bronze {
+    background-color: #ad8a56;
+    color: var(--white);
+  }
+  .point p {
+    color: var(--primary-heavy);
+  }
+}
