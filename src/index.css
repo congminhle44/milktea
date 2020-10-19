@@ -1,6 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Oxygen', sans-serif;
-  box-sizing: border-box;
 }
 html {
   --white: #fff;
@@ -14,3 +19,35 @@ html {
   --default: #e6e6e6;
   --default-heavy: #939393;
 }
+@media only screen and (min-width: 375px) {
+  .App {
+    overflow-x: hidden;
+  }
+  .home .main {
+    padding: 2rem 1rem;
+    width: 100%;
+    position: relative;
+    left: 0;
+    transition: all 0.3s;
+    max-width: 1028px;
+    margin: 0 auto;
+  }
+  .home.menu .main {
+    left: 220px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .App {
+    overflow-x: visible;
+  }
+  .home {
+    display: flex;
+    transform: translateX(0);
+  }
+  .main {
+    padding: 2rem 1rem;
+    width: 100%;
+  }
+}
+
+@import './components/Header/header.css';

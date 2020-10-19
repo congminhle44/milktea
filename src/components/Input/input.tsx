@@ -5,6 +5,7 @@ import React, {AllHTMLAttributes, FC} from 'react';
 import {ReactComponent as IcoError} from './svg/Error.svg';
 import {ReactComponent as IcoSuccess} from './svg/Success.svg';
 import {ReactComponent as IcoPassword} from './svg/TogglePassword.svg';
+import {ReactComponent as Search} from './svg/search.svg';
 
 import styles from './input.module.css';
 
@@ -14,6 +15,7 @@ interface InputProps extends AllHTMLAttributes<HTMLInputElement> {
   error?: boolean;
   password?: boolean;
   multiline?: boolean;
+  search?: boolean;
   label?: string;
   message?: string;
 }
@@ -24,6 +26,7 @@ const Input: FC<InputProps> = ({
   message,
   multiline,
   label,
+  search,
   success,
   error,
   id,
@@ -49,7 +52,17 @@ const Input: FC<InputProps> = ({
         {label}
       </label>
       {!multiline ? (
-        <div className={styles.inputWrapper}>
+        <div
+          className={clsx(
+            styles.inputWrapper,
+            search && styles.inputWrapperSearch,
+          )}
+        >
+          {search ? (
+            <div className={styles.searchIcon}>
+              <Search />
+            </div>
+          ) : null}
           <input
             className={clsx(
               styles.input,
