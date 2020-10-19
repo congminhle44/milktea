@@ -1,14 +1,10 @@
-import React, { FC } from "react";
-import styles from "./checkbox.module.css";
+import React, {AllHTMLAttributes, FC} from 'react';
+import styles from './checkbox.module.css';
 
-interface CheckboxProps {
-  disable: boolean;
-}
+interface CheckboxProps extends AllHTMLAttributes<HTMLInputElement> {}
 
-const Checkbox: FC<CheckboxProps> = ({ disable }) => {
-  return (
-    <input className={styles.checkbox} type="checkbox" disabled={disable} />
-  );
+const Checkbox: FC<CheckboxProps> = ({...others}) => {
+  return <input className={styles.checkbox} type="checkbox" {...others} />;
 };
 
 export default Checkbox;

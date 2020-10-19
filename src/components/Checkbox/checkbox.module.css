@@ -6,6 +6,7 @@
   border: 2px solid var(--default);
   width: 18px;
   height: 18px;
+  transition: all 0.2s ease-in;
 }
 
 /* hover */
@@ -18,7 +19,7 @@
   border-color: var(--primary);
 }
 .checkbox:checked:after {
-  content: "\2714";
+  content: '\2714';
   font-size: 14px;
   color: var(--primary);
   display: flex;
@@ -35,7 +36,7 @@
   border-color: var(--default-heavy);
 }
 .checkbox:disabled:after {
-  content: "\2714";
+  content: '\2714';
   color: var(--default-heavy);
   display: flex;
   justify-content: center;

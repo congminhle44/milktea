@@ -1,20 +1,10 @@
-import React, { FC } from "react";
-import styles from "./radiobutton.module.css";
+import React, {AllHTMLAttributes, FC} from 'react';
+import styles from './radiobutton.module.css';
 
-interface RadioProps {
-  name: string;
-  disable: boolean;
-}
+interface RadioProps extends AllHTMLAttributes<HTMLInputElement> {}
 
-const RadioButton: FC<RadioProps> = ({ name, disable }) => {
-  return (
-    <input
-      name={name}
-      className={styles.rdoButton}
-      type="radio"
-      disabled={disable}
-    />
-  );
+const RadioButton: FC<RadioProps> = ({...others}) => {
+  return <input className={styles.rdoButton} type="radio" {...others} />;
 };
 
 export default RadioButton;

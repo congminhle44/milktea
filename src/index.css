@@ -1,3 +1,16 @@
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Oxygen', sans-serif;
+  box-sizing: border-box;
+}
+html {
+  --white: #fff;
+  --primary: #1e90ff;
+  --primary-light: #4ba6ff;
+  --primary-heavy: #0061ff;
+  --secondary: #115ffb;
+  --success: #18a957;
+  --warning: #ffbb38;
+  --error: #df1642;
+  --default: #e6e6e6;
+  --default-heavy: #939393;
 }
