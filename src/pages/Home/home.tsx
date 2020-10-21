@@ -1,31 +1,24 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import Carousel from '../../components/Carousel/Carousel';
 import Customer from '../../components/Customers/Customers';
-import Header from '../../components/Header/Header';
 import Welcome from '../../components/Welcome/Welcome';
 
-interface HomeProps {}
+import imgMilktea from '../../assets/images/Carousel.jpg';
 
-const Home: FC<HomeProps> = () => {
-  const [showMenu, setShowMenu] = useState<boolean>(false);
+interface HomeProps {
+  openMenu?: () => void;
+}
+
+const Home: FC<HomeProps> = ({openMenu}) => {
   return (
-    <div className={!showMenu ? 'home' : 'home menu'}>
-      <div className="header">
-        <Header
-          hideMenu={() => {
-            setShowMenu(false);
-          }}
-        />
-      </div>
-      <div className="main">
-        <Welcome
-          showMenu={() => {
-            setShowMenu(true);
-          }}
-        />
-        <Carousel />
-        <Customer />
-      </div>
+    <div className="main">
+      <Welcome showMenu={openMenu} />
+      <Carousel
+        heading="Your loyal customers"
+        description="Customer satisfaction is worthless.<br/>Customer loyalty is priceless"
+        image={<img src={imgMilktea} alt="MilkTea" />}
+      />
+      <Customer />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {ReactComponent as Menu} from './icons/MenuIcon.svg';
+import {MenuIcon} from '../Icons';
 import styles from './welcome.module.css';
 
 interface WelcomeProps {
@@ -19,7 +19,7 @@ const Welcome: FC<WelcomeProps> = ({showMenu}) => {
         }}
         className={styles.toggleMenu}
       >
-        <Menu />
+        <MenuIcon />
       </div>
     </div>
   );

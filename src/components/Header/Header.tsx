@@ -1,9 +1,8 @@
 import React, {FC} from 'react';
-import {ReactComponent as Employee} from './icon/Employee.svg';
-import {ReactComponent as Loyal} from './icon/Loyal.svg';
-import {ReactComponent as Reports} from './icon/Reports.svg';
-import {ReactComponent as Rev} from './icon/Rev.svg';
-import {ReactComponent as Cancel} from './icon/Cancel.svg';
+
+import {Employee, Cancel, Reports, Rev, Loyal} from '../Icons';
+
+import styles from './header.module.css';
 
 interface HeaderProps {
   hideMenu: any;
@@ -11,32 +10,32 @@ interface HeaderProps {
 
 const Home: FC<HeaderProps> = ({hideMenu}) => {
   return (
-    <div className="header">
-      <div className="headerLogo">
+    <div className={styles.header}>
+      <div className={styles.headerLogo}>
         <div
           onClick={() => {
             hideMenu();
           }}
-          className="cancelButton"
+          className={styles.cancelButton}
         >
           <Cancel />
         </div>
         <img src="./images/logo.png" alt="milk tea logo" />
       </div>
-      <div className="headerMenu">
-        <div className="headerMenuItem">
+      <div className={styles.headerMenu}>
+        <div className={styles.headerMenuItem}>
           <Employee />
           <p>Employees</p>
         </div>
-        <div className="headerMenuItemFocus">
+        <div className={styles.headerMenuItem}>
           <Loyal />
           <p>Loyal customers</p>
         </div>
-        <div className="headerMenuItem">
+        <div className={styles.headerMenuItem}>
           <Reports />
           <p>Reports</p>
         </div>
-        <div className="headerMenuItem">
+        <div className={styles.headerMenuItem}>
           <Rev />
           <p>Revenue</p>
         </div>
