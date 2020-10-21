@@ -27,6 +27,7 @@ const List: FC<ListProps> = ({setDeleteModal, setModal, setUser}) => {
           }}
           onDoubleClick={() => {
             isDbClick = true;
+            setUser(data);
             setDeleteModal();
           }}
           className={styles.listItem}

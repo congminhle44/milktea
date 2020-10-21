@@ -1,5 +1,5 @@
 @media only screen and (min-width: 320px) {
-  .home .header {
+  .header {
     display: flex;
     position: fixed;
     width: 13.42rem;
@@ -12,14 +12,11 @@
     box-shadow: inset -1px 0px 0px #e4e4e4;
     transition: all 0.3s;
     padding: 0 1rem;
+    z-index: 3;
   }
 
   .headerMenu {
     width: 100%;
-  }
-
-  .home.menu .header {
-    left: 0;
   }
 
   .headerLogo {
@@ -45,6 +42,13 @@
     border-radius: 4px;
     color: var(--default-heavy);
   }
+
+  .headerMenuItem:hover {
+    background-color: var(--primary);
+    color: var(--white);
+    transition: all 0.3s;
+  }
+
   .headerMenuItem svg {
     margin-right: 0.625rem;
   }
@@ -72,29 +76,29 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .home .header {
+  .header {
     position: sticky;
     top: 0;
     left: 0;
     height: 880px;
   }
-  .headerLogo .cancelButton {
+  .cancelButton {
     display: none;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .home .header {
+  .header {
     width: 15.625rem;
     padding: 0 2rem;
   }
-  .headerLogo .cancelButton {
+  .cancelButton {
     display: none;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .home .header {
+  .header {
     width: 20rem;
   }
 }

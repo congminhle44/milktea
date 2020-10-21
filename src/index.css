@@ -23,7 +23,7 @@ html {
   .App {
     overflow-x: hidden;
   }
-  .home .main {
+  .main {
     padding: 2rem 1rem;
     width: 100%;
     position: relative;
@@ -32,22 +32,13 @@ html {
     max-width: 1028px;
     margin: 0 auto;
   }
-  .home.menu .main {
-    left: 220px;
-  }
 }
 @media only screen and (min-width: 768px) {
   .App {
     overflow-x: visible;
-  }
-  .home {
-    display: flex;
-    transform: translateX(0);
   }
   .main {
     padding: 2rem 1rem;
     width: 100%;
   }
 }
-
-@import './components/Header/header.css';

@@ -1,20 +1,24 @@
-import React, {FC} from 'react';
+import React, {FC, ReactNode} from 'react';
+
 import styles from './carousel.module.css';
 
-interface CarouselProps {}
+interface CarouselProps {
+  image: ReactNode;
+  heading: string;
+  description: string;
+}
 
-const Carousel: FC<CarouselProps> = (props) => {
-  return (
-    <div className={styles.carousel}>
-      <div className={styles.carouselImg}>
-        <img src="./images/Carousel.jpg" alt="Milk tea carousel" />
-      </div>
-      <div className={styles.carouselContent}>
-        <h3>Your loyal customers</h3>
-        <p>Customer satisfaction is worthless. Customer loyalty is priceless</p>
-      </div>
+const Carousel: FC<CarouselProps> = ({image, heading, description}) => (
+  <div className={styles.carousel}>
+    <div className={styles.image}>{image}</div>
+    <div className={styles.content}>
+      <h3 className={styles.heading}>{heading}</h3>
+      <p
+        className={styles.description}
+        dangerouslySetInnerHTML={{__html: description}}
+      />
     </div>
-  );
-};
+  </div>
+);
 
 export default Carousel;
