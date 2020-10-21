@@ -8,6 +8,11 @@
   }
   .customerTable {
     width: 100%;
+    border-collapse: collapse;
+  }
+  .loadContent {
+    text-align: center;
+    width: 100%;
   }
   .customerTable th {
     font-size: 0.75rem;
@@ -17,9 +22,18 @@
     padding: 1.5rem 1rem;
   }
   .customerTable td {
-    border-top: 1px solid var(--default);
-    border-bottom: 1px solid var(--default);
     padding: 1rem;
+  }
+  .listItem {
+    border-top: 1px solid var(--default);
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+  }
+  .listItem:hover {
+    background-color: var(--default);
+  }
+  .listItem:last-child {
+    border-bottom: 1px solid var(--default);
   }
   .listInfo {
     display: flex;
@@ -44,6 +58,7 @@
 
   .loadButton {
     width: 100%;
+    padding: 0 1rem;
     display: flex;
     justify-content: center;
     align-items: center;

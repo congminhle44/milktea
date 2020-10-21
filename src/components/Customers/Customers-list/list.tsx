@@ -3,14 +3,35 @@ import styles from './list.module.css';
 import data from './data';
 import clsx from 'clsx';
 import Button, {ButtonVariants} from '../../Button';
+import formatPoint from '../../../Helper/formatPoints';
 
-interface ListProps {}
+interface ListProps {
+  setModal: any;
+  setUser: any;
+  setDeleteModal: any;
+}
 
-const List: FC<ListProps> = (props) => {
+const List: FC<ListProps> = ({setDeleteModal, setModal, setUser}) => {
   const renderCustomer = () => {
+    let isDbClick: boolean = false;
     return data.map((data, index) => {
       return (
-        <tr key={index}>
+        <tr
+          onClick={() => {
+            setTimeout(() => {
+              if (isDbClick === false) {
+                setModal();
+                setUser(data);
+              }
+            }, 200);
+          }}
+          onDoubleClick={() => {
+            isDbClick = true;
+            setDeleteModal();
+          }}
+          className={styles.listItem}
+          key={index}
+        >
           <td>
             <div className={styles.listInfo}>
               <img src={data.images} alt="user" />
@@ -33,7 +54,7 @@ const List: FC<ListProps> = (props) => {
             </p>
           </td>
           <td className={styles.point}>
-            <p>{data.point}</p>
+            <p>{formatPoint(data.point)}</p>
           </td>
         </tr>
       );
@@ -52,7 +73,9 @@ const List: FC<ListProps> = (props) => {
         <tbody>{renderCustomer()}</tbody>
       </table>
       <div className={styles.loadButton}>
-        <Button>Load more</Button>
+        <Button variant={ButtonVariants.Large}>
+          <p className={styles.loadContent}>Load more</p>
+        </Button>
       </div>
     </div>
   );
