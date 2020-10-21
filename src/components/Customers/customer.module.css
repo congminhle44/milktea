@@ -17,10 +17,35 @@
     align-items: center;
     width: 90%;
   }
+  .formItem {
+    margin-bottom: 1.5rem;
+  }
+
+  .portalSubHeader {
+    margin: 1.5rem 0;
+    color: var(--default-heavy);
+  }
+  .portalContent {
+    font-size: 1rem;
+    line-height: calc(28 / 16);
+    color: var(--default-heavy);
+  }
+  .addButton {
+    margin-left: 1rem;
+  }
 }
 
 @media only screen and (min-width: 768px) {
   .customerList {
     padding: 0 1.5rem;
+  }
+  .customerEvent {
+    padding: 0 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .customerEvent {
+    padding: 0 2rem;
   }
 }

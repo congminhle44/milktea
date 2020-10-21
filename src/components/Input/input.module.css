@@ -4,7 +4,7 @@
 
 .inputWrapper {
   position: relative;
-  width: fit-content;
+  width: 100%;
 }
 
 .StatusIco {
@@ -21,10 +21,12 @@
   font-family: 'Inter', sans-serif;
   font-size: 1.125rem;
   line-height: calc(32 / 18);
+  color: var(--primary);
 }
 
 .input {
   display: block;
+  -webkit-appearance: none;
   box-shadow: inset 0px 0px 0px 2px var(--default);
   position: relative;
   padding: 0.625rem 1rem;

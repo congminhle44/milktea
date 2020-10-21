@@ -11,6 +11,7 @@ interface ButtonProps extends AllHTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode;
   type?: 'submit' | 'reset' | 'button';
   IconButton?: boolean;
+  error?: boolean;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ const Button: FC<ButtonProps> = ({
   children,
   variant,
   IconButton,
+  error,
   icon,
   type = 'button',
   ...others
@@ -28,6 +30,7 @@ const Button: FC<ButtonProps> = ({
         styles.button,
         ButtonVariants.Large === variant && styles.large,
         ButtonVariants.Small === variant && styles.small,
+        error && styles.error,
         IconButton && styles.iconButton,
         ghost && styles.ghost,
       )}

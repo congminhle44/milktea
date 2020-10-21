@@ -4,8 +4,8 @@
     position: fixed;
     width: 13.42rem;
     top: 0;
-    left: -220px;
     height: 100%;
+    left: -220px;
     align-items: center;
     flex-direction: column;
     background-color: var(--white);
@@ -46,7 +46,7 @@
     color: var(--default-heavy);
   }
   .headerMenuItem svg {
-    margin-right: 0.6rem;
+    margin-right: 0.625rem;
   }
   .headerMenuItem p {
     font-size: 0.875rem;
@@ -64,7 +64,7 @@
     background-color: var(--primary);
   }
   .headerMenuItemFocus svg {
-    margin-right: 0.6rem;
+    margin-right: 0.625rem;
   }
   .headerMenuItemFocus p {
     font-size: 0.875rem;
@@ -73,7 +73,10 @@
 
 @media only screen and (min-width: 768px) {
   .home .header {
-    position: static;
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 880px;
   }
   .headerLogo .cancelButton {
     display: none;
@@ -84,7 +87,6 @@
   .home .header {
     width: 15.625rem;
     padding: 0 2rem;
-    height: 1200px;
   }
   .headerLogo .cancelButton {
     display: none;
