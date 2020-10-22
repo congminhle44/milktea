@@ -2,11 +2,13 @@ import React from 'react';
 
 import {api} from '../';
 
-api
-  .get('/customers')
-  .then((customer) => {
-    React.createContext(customer);
-  })
-  .catch((err) => {
-    return err;
-  });
+const getCustomers = () => {
+  api
+    .get('/customers')
+    .then((customer) => {})
+    .catch((err) => {
+      return err;
+    });
+};
+
+export default getCustomers;
