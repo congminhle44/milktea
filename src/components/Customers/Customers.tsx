@@ -1,19 +1,32 @@
 import React, {FC, useState} from 'react';
+
 import Button, {ButtonVariants} from '../Button';
+
 import Input from '../Input/input';
+
 import List from './Customers-list/list';
+
 import {Portal} from '../Modal';
-import {ReactComponent as Plus} from './icons/Plus.svg';
+
+import {Plus} from '../Icons';
+
 import styles from './customer.module.css';
+
 import formatPoints from '../../Helper/formatPoints';
+
+import getCustomers from '../../api/customers';
 
 interface CustomersProps {}
 
 const Customer: FC<CustomersProps> = (props) => {
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
+
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+
   const [statusModal, setStatusModal] = useState<string>('create');
+
   const [userObject, setUsertObject] = useState<any>({});
+
   return (
     <div className={styles.customer}>
       {showAddModal ? (
@@ -39,7 +52,7 @@ const Customer: FC<CustomersProps> = (props) => {
             <Input
               label="Title"
               defaultValue={
-                Object.keys(userObject).length > 0 ? userObject.description : ''
+                Object.keys(userObject).length > 0 ? userObject.title : ''
               }
               placeholder="Enter title"
             />
@@ -48,7 +61,7 @@ const Customer: FC<CustomersProps> = (props) => {
             <Input
               label="Points"
               defaultValue={
-                Object.keys(userObject).length > 0 ? userObject.point : ''
+                Object.keys(userObject).length > 0 ? userObject.points : ''
               }
               placeholder="Enter points"
             />
@@ -73,13 +86,13 @@ const Customer: FC<CustomersProps> = (props) => {
                 <strong>Name:</strong> {userObject.name}
               </p>
               <p>
-                <strong>Title:</strong> {userObject.description}
+                <strong>Title:</strong> {userObject.title}
               </p>
               <p>
                 <strong>Rank:</strong> {userObject.rank}
               </p>
               <p>
-                <strong>Points:</strong> {formatPoints(userObject.point)}
+                <strong>Points:</strong> {formatPoints(userObject.points)}
               </p>
             </div>
           </div>

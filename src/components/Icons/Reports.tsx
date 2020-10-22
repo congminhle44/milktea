@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {SVGAttributes} from 'react';
 
-const Reports = (props: any) => {
+const Reports = (props: SVGAttributes<HTMLOrSVGElement>) => {
   return (
     <svg
       width={16}

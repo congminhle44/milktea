@@ -1,0 +1,20 @@
+@media only screen and (min-width: 375px) {
+  .main {
+    padding: 2rem 1rem;
+    width: 100%;
+    position: relative;
+    left: 0;
+    transition: all 0.3s;
+    max-width: 1028px;
+    margin: 0 auto;
+  }
+  .main.menu {
+    left: 220px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .main {
+    padding: 2rem 1rem;
+    width: 100%;
+  }
+}

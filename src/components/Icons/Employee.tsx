@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {SVGAttributes} from 'react';
 
-const Employee = (props: any) => {
+const Employee = (props: SVGAttributes<HTMLOrSVGElement>) => {
   return (
     <svg width={14} height={10} viewBox="0 0 14 10" fill="none" {...props}>
       <path

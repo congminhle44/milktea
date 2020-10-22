@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {SVGAttributes} from 'react';
 
-const Rev = (props: any) => {
+const Rev = (props: SVGAttributes<HTMLOrSVGElement>) => {
   return (
     <svg
       width={7}

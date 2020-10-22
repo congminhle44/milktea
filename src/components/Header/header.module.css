@@ -12,7 +12,11 @@
     box-shadow: inset -1px 0px 0px #e4e4e4;
     transition: all 0.3s;
     padding: 0 1rem;
-    z-index: 3;
+    z-index: 1;
+  }
+
+  .header.menu {
+    left: 0;
   }
 
   .headerMenu {

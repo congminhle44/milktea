@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {SVGAttributes} from 'react';
 
-const Cancel = (props: any) => {
+const Cancel = (props: SVGAttributes<HTMLOrSVGElement>) => {
   return (
     <svg
       width={14}
