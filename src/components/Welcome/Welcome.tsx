@@ -1,12 +1,12 @@
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
+import ShowContext from '../../Layout/Context';
 import {MenuIcon} from '../Icons';
 import styles from './welcome.module.css';
 
-interface WelcomeProps {
-  showMenu?: any;
-}
+interface WelcomeProps {}
 
-const Welcome: FC<WelcomeProps> = ({showMenu}) => {
+const Welcome: FC<WelcomeProps> = () => {
+  const [show, setShow] = useContext<any>(ShowContext);
   return (
     <div className={styles.welcomeWrapper}>
       <div className={styles.welcomeContent}>
@@ -15,7 +15,7 @@ const Welcome: FC<WelcomeProps> = ({showMenu}) => {
       </div>
       <div
         onClick={() => {
-          showMenu();
+          setShow(true);
         }}
         className={styles.toggleMenu}
       >

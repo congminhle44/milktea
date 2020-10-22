@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {SVGAttributes} from 'react';
 
-const Loyal = (props: any) => {
+const Loyal = (props: SVGAttributes<HTMLOrSVGElement>) => {
   return (
     <svg
       width={16}

@@ -1,20 +1,22 @@
-import React, {FC} from 'react';
+import clsx from 'clsx';
+import React, {FC, useContext} from 'react';
+
+import ShowContext from '../../Layout/Context';
 
 import {Employee, Cancel, Reports, Rev, Loyal} from '../Icons';
 
 import styles from './header.module.css';
 
-interface HeaderProps {
-  hideMenu: any;
-}
+interface HeaderProps {}
 
-const Home: FC<HeaderProps> = ({hideMenu}) => {
+const Home: FC<HeaderProps> = (props) => {
+  const [show, setShow] = useContext<any>(ShowContext);
   return (
-    <div className={styles.header}>
+    <div className={clsx(styles.header, show && styles.menu)}>
       <div className={styles.headerLogo}>
         <div
           onClick={() => {
-            hideMenu();
+            setShow(false);
           }}
           className={styles.cancelButton}
         >

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {SVGAttributes} from 'react';
 
-const MenuIcon = (props: any) => {
+const MenuIcon = (props: SVGAttributes<HTMLOrSVGElement>) => {
   return (
     <svg
       width={28}

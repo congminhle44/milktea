@@ -3,7 +3,7 @@ import Button, {ButtonVariants} from '../Button';
 import Input from '../Input/input';
 import List from './Customers-list/list';
 import {Portal} from '../Modal';
-import {ReactComponent as Plus} from './icons/Plus.svg';
+import {Plus} from '../Icons';
 import styles from './customer.module.css';
 import formatPoints from '../../Helper/formatPoints';
 

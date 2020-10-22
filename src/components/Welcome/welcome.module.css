@@ -10,6 +10,9 @@
   .welcomeContent h3 {
     font-size: 2rem;
   }
+  .toggleMenu {
+    cursor: pointer;
+  }
 }
 
 @media only screen and (min-width: 768px) {
