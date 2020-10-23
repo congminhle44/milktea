@@ -1,18 +1,36 @@
-import React, {FC, useContext} from 'react';
-import Carousel from '../../components/Carousel/Carousel';
-import Customer from '../../components/Customers/Customers';
+import clsx from 'clsx';
+
+import React, {FC, useEffect, useContext} from 'react';
+
+import * as action from '../../Redux/Customers/action';
+
+import {connect} from 'react-redux';
+
+import Carousel from './components/Carousel/Carousel';
+
+import Customer from './components/Customers/Customers';
+
 import Welcome from '../../components/Welcome/Welcome';
 
 import imgMilktea from '../../assets/images/Carousel.jpg';
-import ShowContext from '../../Layout/Context';
+
+import ShowContext from '../../Context';
 
 import styles from './home.module.css';
-import clsx from 'clsx';
 
-interface HomeProps {}
+interface HomeProps {
+  customers?: [];
+  getCustomerList?: any;
+  loading?: boolean;
+}
 
-const Home: FC<HomeProps> = (props) => {
+const Home: FC<HomeProps> = ({getCustomerList, customers, loading}) => {
+  useEffect(() => {
+    getCustomerList();
+  }, []);
+
   const [show, setShow] = useContext<any>(ShowContext);
+
   return (
     <div className={clsx(styles.main, show && styles.menu)}>
       <Welcome />
@@ -21,9 +39,22 @@ const Home: FC<HomeProps> = (props) => {
         description="Customer satisfaction is worthless.<br/>Customer loyalty is priceless"
         image={<img src={imgMilktea} alt="MilkTea" />}
       />
-      <Customer />
+      <Customer loading={loading} getCustomerList={customers} />
     </div>
   );
 };
 
-export default Home;
+const mapStateToProps = (state: any) => ({
+  customers: state.customerReducer.customers,
+  loading: state.customerReducer.loading,
+});
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getCustomerList: () => {
+      dispatch(action.getCustomerListApi());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

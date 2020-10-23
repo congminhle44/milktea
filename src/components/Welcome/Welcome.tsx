@@ -1,5 +1,5 @@
 import React, {FC, useContext} from 'react';
-import ShowContext from '../../Layout/Context';
+import ShowContext from '../../Context';
 import {MenuIcon} from '../Icons';
 import styles from './welcome.module.css';
 

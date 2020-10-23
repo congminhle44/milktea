@@ -1,24 +1,26 @@
 import React, {FC, useState} from 'react';
 
-import Button, {ButtonVariants} from '../Button';
+import Button, {ButtonVariants} from '../../../../components/Button';
 
-import Input from '../Input/input';
+import Input from '../../../../components/Input/input';
 
-import List from './Customers-list/list';
+import List from './CustomersList';
 
-import {Portal} from '../Modal';
+import {Portal} from '../../../../components/Modal';
 
-import {Plus} from '../Icons';
+import {Plus} from '../../../../components/Icons';
 
 import styles from './customer.module.css';
 
-import formatPoints from '../../Helper/formatPoints';
+import formatPoints from '../../../../Helper/formatPoints';
+import identifyRank from '../../../../Helper/indentifyRank';
 
-import getCustomers from '../../api/customers';
+interface CustomersProps {
+  getCustomerList?: any;
+  loading?: boolean;
+}
 
-interface CustomersProps {}
-
-const Customer: FC<CustomersProps> = (props) => {
+const Customer: FC<CustomersProps> = ({getCustomerList, loading}) => {
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
@@ -89,7 +91,7 @@ const Customer: FC<CustomersProps> = (props) => {
                 <strong>Title:</strong> {userObject.title}
               </p>
               <p>
-                <strong>Rank:</strong> {userObject.rank}
+                <strong>Rank:</strong> {identifyRank(userObject.points)}
               </p>
               <p>
                 <strong>Points:</strong> {formatPoints(userObject.points)}
@@ -118,6 +120,8 @@ const Customer: FC<CustomersProps> = (props) => {
       </div>
       <div className={styles.customerList}>
         <List
+          loading={loading}
+          customers={getCustomerList}
           setModal={() => {
             setStatusModal('edit');
             setShowAddModal(true);

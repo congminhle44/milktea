@@ -1,38 +1,36 @@
-import React, {FC, useEffect, useState} from 'react';
+import clsx from 'clsx';
 
-import {connect} from 'react-redux';
+import React, {FC, useEffect} from 'react';
 
-import styles from './list.module.css';
+import styles from './customerList.module.css';
 
-import Button, {ButtonVariants} from '../../Button';
+import Button, {ButtonVariants} from '../../../../../components/Button';
 
-import formatPoint from '../../../Helper/formatPoints';
+import formatPoint from '../../../../../Helper/formatPoints';
 
-import * as action from '../../../Redux/Customers/action';
+import {Loading} from '../../../../../components/Loading';
+
+import identifyRank from '../../../../../Helper/indentifyRank';
 
 interface ListProps {
   setModal?: any;
   setUser?: any;
   setDeleteModal?: any;
   customers?: any;
-  getCustomerList?: any;
+  loading?: boolean;
 }
 
 const List: FC<ListProps> = ({
   customers,
   setDeleteModal,
   setModal,
+  loading,
   setUser,
-  getCustomerList,
 }) => {
-  useEffect(() => {
-    getCustomerList();
-  }, []);
-
-  const renderCustomer = () => {
+  const renderCustomerTableContent = () => {
     let isDbClick: boolean = false;
 
-    if (customers.length > 0) {
+    if (customers) {
       return customers.map((customer: any, index: number) => {
         return (
           <tr
@@ -54,25 +52,28 @@ const List: FC<ListProps> = ({
           >
             <td>
               <div className={styles.listInfo}>
-                <img src={customer.avatar} alt="user" />
+                <img
+                  className={styles.avatar}
+                  src={customer.avatar}
+                  alt="user"
+                />
                 <div className={styles.info}>
-                  <h5>{customer.name}</h5>
-                  <p>{customer.title}</p>
+                  <h5 className={styles.infoTitle}>{customer.name}</h5>
+                  <p className={styles.infoContent}>{customer.title}</p>
                 </div>
               </div>
             </td>
-            {/* <td className={styles.rank}>
-              <p
+            <td
               className={clsx(
-                styles.rankDetail,
-                customer.rank === 'Silver' && styles.silver,
-                customer.rank === 'Gold' && styles.gold,
-                customer.rank === 'Bronze' && styles.bronze,
+                styles.rank,
+                identifyRank(customer.point) === 'Gold' && styles.gold,
+                identifyRank(customer.point) === 'Silver' && styles.silver,
+                identifyRank(customer.point) === 'Bronze' && styles.bronze,
+                identifyRank(customer.point) === 'Plastic' && styles.plastic,
               )}
-              >
-                {customer.rank}
-              </p>
-            </td> */}
+            >
+              {identifyRank(customer.point)}
+            </td>
             <td className={styles.point}>
               <p>{formatPoint(customer.points)}</p>
             </td>
@@ -88,11 +89,16 @@ const List: FC<ListProps> = ({
         <thead>
           <tr>
             <th>Customer</th>
-            {/* <th className={styles.tablet}>Rank</th> */}
+            <th className={styles.tablet}>Rank</th>
             <th className={styles.tablet}>Points</th>
           </tr>
         </thead>
-        <tbody>{renderCustomer()}</tbody>
+        {loading ? (
+          <div className={styles.loading}>
+            <Loading />
+          </div>
+        ) : null}
+        <tbody>{renderCustomerTableContent()}</tbody>
       </table>
       <div className={styles.loadButton}>
         <Button variant={ButtonVariants.Large}>
@@ -103,16 +109,4 @@ const List: FC<ListProps> = ({
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  customers: state.customerReducer.customers,
-});
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    getCustomerList: () => {
-      dispatch(action.getCustomerListApi());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default List;
