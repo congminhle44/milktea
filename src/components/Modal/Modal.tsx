@@ -7,9 +7,20 @@ interface ModalProps {
   event?: string;
   error?: boolean;
   show?: any;
+  onCancel?: any;
+  onCreate?: any;
+  onDelete?: any;
 }
 
-const Modal: FC<ModalProps> = ({show, error, children, header, event}) => {
+const Modal: FC<ModalProps> = ({
+  onCancel,
+  onCreate,
+  onDelete,
+  error,
+  children,
+  header,
+  event,
+}) => {
   return (
     <div className={styles.modalWrapper}>
       <div className={styles.modal}>
@@ -19,17 +30,15 @@ const Modal: FC<ModalProps> = ({show, error, children, header, event}) => {
         <div className={styles.modalBody}>
           <div className={styles.modalContent}>{children}</div>
           <div className={styles.modalFooter}>
-            <Button
-              onClick={() => {
-                show();
-              }}
-              ghost
-              variant={ButtonVariants.Small}
-            >
+            <Button onClick={onCancel} ghost variant={ButtonVariants.Small}>
               Cancel
             </Button>
             <div className={styles.eventButton}>
-              <Button error={error} variant={ButtonVariants.Small}>
+              <Button
+                onClick={onCreate || onDelete}
+                error={error}
+                variant={ButtonVariants.Small}
+              >
                 {event}
               </Button>
             </div>

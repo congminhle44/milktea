@@ -5,18 +5,22 @@
     box-shadow: 0px 0px 1px rgba(48, 49, 51, 0.05),
       0px 16px 24px rgba(48, 49, 51, 0.1);
     border-radius: 4px;
+    min-height: 24.125rem;
   }
+
   .customerEvent {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
   }
+
   .searchCustomers {
     display: flex;
     align-items: center;
     width: 90%;
   }
+
   .formItem {
     margin-bottom: 1.5rem;
   }
@@ -25,11 +29,13 @@
     margin: 1.5rem 0;
     color: var(--default-heavy);
   }
+
   .portalContent {
     font-size: 1rem;
     line-height: calc(28 / 16);
     color: var(--default-heavy);
   }
+
   .addButton {
     margin-left: 1rem;
   }
@@ -39,6 +45,7 @@
   .customerList {
     padding: 0 1.5rem;
   }
+
   .customerEvent {
     padding: 0 1.5rem;
   }

@@ -1,12 +1,12 @@
 import React, {FC, useContext} from 'react';
-import ShowContext from '../../Layout/Context';
+import ShowContext from '../../Context';
 import {MenuIcon} from '../Icons';
 import styles from './welcome.module.css';
 
 interface WelcomeProps {}
 
 const Welcome: FC<WelcomeProps> = () => {
-  const [show, setShow] = useContext<any>(ShowContext);
+  const [, setShow] = useContext<any>(ShowContext);
   return (
     <div className={styles.welcomeWrapper}>
       <div className={styles.welcomeContent}>

@@ -1,24 +1,41 @@
 import React, {FC, useState} from 'react';
 
-import Button, {ButtonVariants} from '../Button';
+import Button, {ButtonVariants} from '../../../../components/Button';
 
-import Input from '../Input/input';
+import Input from '../../../../components/Input/input';
 
-import List from './Customers-list/list';
+import List from './CustomersList';
 
-import {Portal} from '../Modal';
+import {Portal} from '../../../../components/Modal';
 
-import {Plus} from '../Icons';
+import {Plus} from '../../../../components/Icons';
 
 import styles from './customer.module.css';
 
-import formatPoints from '../../Helper/formatPoints';
+import formatPoints from '../../../../Helper/formatPoints';
+import identifyRank from '../../../../Helper/indentifyRank';
 
-import getCustomers from '../../api/customers';
+interface CustomersProps {
+  getCustomerList?: any;
+  createCustomer?: any;
+  deleteCustomer?: any;
+  loading?: boolean;
+  editCustomers?: any;
+}
 
-interface CustomersProps {}
+interface UserObject {
+  name: string;
+  title: string;
+  points: number;
+}
 
-const Customer: FC<CustomersProps> = (props) => {
+const Customer: FC<CustomersProps> = ({
+  getCustomerList,
+  createCustomer,
+  deleteCustomer,
+  editCustomers,
+  loading,
+}) => {
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
@@ -27,14 +44,35 @@ const Customer: FC<CustomersProps> = (props) => {
 
   const [userObject, setUsertObject] = useState<any>({});
 
+  const [postUserObject, setPostUserObject] = useState<UserObject>({
+    name: '',
+    title: '',
+    points: 0,
+  });
+
+  const handleTyping = (e: any) => {
+    const {name, value} = e.target;
+    setPostUserObject((postUserObject) => ({...postUserObject, [name]: value}));
+  };
+
+  const handleSubmitUser = () => {
+    if (statusModal === 'create') {
+      createCustomer(postUserObject);
+    }
+    setShowAddModal(false);
+  };
+
   return (
     <div className={styles.customer}>
       {showAddModal ? (
         <Portal
-          show={() => {
+          event={statusModal === 'create' ? 'Create' : 'Edit'}
+          onCreate={() => {
+            handleSubmitUser();
+          }}
+          onCancel={() => {
             setShowAddModal(false);
           }}
-          event={statusModal === 'create' ? 'Create' : 'Edit'}
           header={
             statusModal === 'create' ? 'Create customer' : 'Edit customer'
           }
@@ -42,6 +80,8 @@ const Customer: FC<CustomersProps> = (props) => {
           <div className={styles.formItem}>
             <Input
               label="Name"
+              name="name"
+              onChange={handleTyping}
               defaultValue={
                 Object.keys(userObject).length > 0 ? userObject.name : ''
               }
@@ -51,6 +91,8 @@ const Customer: FC<CustomersProps> = (props) => {
           <div className={styles.formItem}>
             <Input
               label="Title"
+              name="title"
+              onChange={handleTyping}
               defaultValue={
                 Object.keys(userObject).length > 0 ? userObject.title : ''
               }
@@ -60,6 +102,8 @@ const Customer: FC<CustomersProps> = (props) => {
           <div className={styles.formItem}>
             <Input
               label="Points"
+              name="points"
+              onChange={handleTyping}
               defaultValue={
                 Object.keys(userObject).length > 0 ? userObject.points : ''
               }
@@ -70,7 +114,11 @@ const Customer: FC<CustomersProps> = (props) => {
       ) : null}
       {showDeleteModal ? (
         <Portal
-          show={() => {
+          onCancel={() => {
+            setShowDeleteModal(false);
+          }}
+          onDelete={() => {
+            deleteCustomer(userObject.id);
             setShowDeleteModal(false);
           }}
           event="Delete"
@@ -89,7 +137,7 @@ const Customer: FC<CustomersProps> = (props) => {
                 <strong>Title:</strong> {userObject.title}
               </p>
               <p>
-                <strong>Rank:</strong> {userObject.rank}
+                <strong>Rank:</strong> {identifyRank(userObject.points)}
               </p>
               <p>
                 <strong>Points:</strong> {formatPoints(userObject.points)}
@@ -118,6 +166,8 @@ const Customer: FC<CustomersProps> = (props) => {
       </div>
       <div className={styles.customerList}>
         <List
+          loading={loading}
+          customers={getCustomerList}
           setModal={() => {
             setStatusModal('edit');
             setShowAddModal(true);

@@ -6,13 +6,16 @@
   .point {
     display: none;
   }
+  .loading {
+    position: absolute;
+    background-color: var(--white);
+    width: 100%;
+  }
+
   .customerTable {
     width: 100%;
     border-collapse: collapse;
-  }
-  .loadContent {
-    text-align: center;
-    width: 100%;
+    position: relative;
   }
   .customerTable th {
     font-size: 0.75rem;
@@ -23,6 +26,11 @@
   }
   .customerTable td {
     padding: 1rem;
+  }
+
+  .loadContent {
+    text-align: center;
+    width: 100%;
   }
   .listItem {
     border-top: 1px solid var(--default);
@@ -35,21 +43,25 @@
   .listItem:last-child {
     border-bottom: 1px solid var(--default);
   }
+
   .listInfo {
     display: flex;
     align-items: center;
   }
-  .listInfo img {
+  .avatar {
     margin-right: 1.5625rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--default);
   }
 
-  .info h5 {
+  .infoTitle {
     font-size: 1rem;
+    margin-bottom: 0.5rem;
     line-height: calc(20 / 16);
     color: #212121;
     font-family: 'Inter', sans-serif;
   }
-  .info p {
+  .infoContent {
     font-size: 0.75rem;
     line-height: 1rem;
     color: #666666;
@@ -92,7 +104,11 @@
     background-color: #ad8a56;
     color: var(--white);
   }
-  .point p {
+  .rankDetail.plastic {
+    color: var(--default-heavy);
+  }
+  .point {
     color: var(--primary-heavy);
+    text-align: right;
   }
 }

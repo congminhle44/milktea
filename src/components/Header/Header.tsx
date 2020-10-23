@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React, {FC, useContext} from 'react';
 
-import ShowContext from '../../Layout/Context';
+import ShowContext from '../../Context';
 
 import {Employee, Cancel, Reports, Rev, Loyal} from '../Icons';
 
