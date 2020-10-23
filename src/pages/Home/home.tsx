@@ -22,14 +22,24 @@ interface HomeProps {
   customers?: [];
   getCustomerList?: any;
   loading?: boolean;
+  createCustomer?: any;
+  deleteCustomer?: any;
+  editCustomers?: any;
 }
 
-const Home: FC<HomeProps> = ({getCustomerList, customers, loading}) => {
+const Home: FC<HomeProps> = ({
+  getCustomerList,
+  createCustomer,
+  deleteCustomer,
+  editCustomers,
+  customers,
+  loading,
+}) => {
   useEffect(() => {
     getCustomerList();
-  }, []);
+  }, [getCustomerList()]);
 
-  const [show, setShow] = useContext<any>(ShowContext);
+  const [show] = useContext<any>(ShowContext);
 
   return (
     <div className={clsx(styles.main, show && styles.menu)}>
@@ -39,7 +49,13 @@ const Home: FC<HomeProps> = ({getCustomerList, customers, loading}) => {
         description="Customer satisfaction is worthless.<br/>Customer loyalty is priceless"
         image={<img src={imgMilktea} alt="MilkTea" />}
       />
-      <Customer loading={loading} getCustomerList={customers} />
+      <Customer
+        editCustomers={editCustomers}
+        deleteCustomer={deleteCustomer}
+        createCustomer={createCustomer}
+        loading={loading}
+        getCustomerList={customers}
+      />
     </div>
   );
 };
@@ -47,12 +63,25 @@ const Home: FC<HomeProps> = ({getCustomerList, customers, loading}) => {
 const mapStateToProps = (state: any) => ({
   customers: state.customerReducer.customers,
   loading: state.customerReducer.loading,
+  userObject: state.customerReducer.userObject,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     getCustomerList: () => {
-      dispatch(action.getCustomerListApi());
+      dispatch(action.getCustomerList());
+    },
+
+    createCustomer: (customerObj: object) => {
+      dispatch(action.createCustomers(customerObj));
+    },
+
+    deleteCustomer: (id: number) => {
+      dispatch(action.deleteCustomers(id));
+    },
+
+    editCustomers: (id: number, userObj: object) => {
+      dispatch(action.editCustomers(id, userObj));
     },
   };
 };

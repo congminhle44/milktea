@@ -17,10 +17,25 @@ import identifyRank from '../../../../Helper/indentifyRank';
 
 interface CustomersProps {
   getCustomerList?: any;
+  createCustomer?: any;
+  deleteCustomer?: any;
   loading?: boolean;
+  editCustomers?: any;
 }
 
-const Customer: FC<CustomersProps> = ({getCustomerList, loading}) => {
+interface UserObject {
+  name: string;
+  title: string;
+  points: number;
+}
+
+const Customer: FC<CustomersProps> = ({
+  getCustomerList,
+  createCustomer,
+  deleteCustomer,
+  editCustomers,
+  loading,
+}) => {
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
@@ -29,14 +44,35 @@ const Customer: FC<CustomersProps> = ({getCustomerList, loading}) => {
 
   const [userObject, setUsertObject] = useState<any>({});
 
+  const [postUserObject, setPostUserObject] = useState<UserObject>({
+    name: '',
+    title: '',
+    points: 0,
+  });
+
+  const handleTyping = (e: any) => {
+    const {name, value} = e.target;
+    setPostUserObject((postUserObject) => ({...postUserObject, [name]: value}));
+  };
+
+  const handleSubmitUser = () => {
+    if (statusModal === 'create') {
+      createCustomer(postUserObject);
+    }
+    setShowAddModal(false);
+  };
+
   return (
     <div className={styles.customer}>
       {showAddModal ? (
         <Portal
-          show={() => {
+          event={statusModal === 'create' ? 'Create' : 'Edit'}
+          onCreate={() => {
+            handleSubmitUser();
+          }}
+          onCancel={() => {
             setShowAddModal(false);
           }}
-          event={statusModal === 'create' ? 'Create' : 'Edit'}
           header={
             statusModal === 'create' ? 'Create customer' : 'Edit customer'
           }
@@ -44,6 +80,8 @@ const Customer: FC<CustomersProps> = ({getCustomerList, loading}) => {
           <div className={styles.formItem}>
             <Input
               label="Name"
+              name="name"
+              onChange={handleTyping}
               defaultValue={
                 Object.keys(userObject).length > 0 ? userObject.name : ''
               }
@@ -53,6 +91,8 @@ const Customer: FC<CustomersProps> = ({getCustomerList, loading}) => {
           <div className={styles.formItem}>
             <Input
               label="Title"
+              name="title"
+              onChange={handleTyping}
               defaultValue={
                 Object.keys(userObject).length > 0 ? userObject.title : ''
               }
@@ -62,6 +102,8 @@ const Customer: FC<CustomersProps> = ({getCustomerList, loading}) => {
           <div className={styles.formItem}>
             <Input
               label="Points"
+              name="points"
+              onChange={handleTyping}
               defaultValue={
                 Object.keys(userObject).length > 0 ? userObject.points : ''
               }
@@ -72,7 +114,11 @@ const Customer: FC<CustomersProps> = ({getCustomerList, loading}) => {
       ) : null}
       {showDeleteModal ? (
         <Portal
-          show={() => {
+          onCancel={() => {
+            setShowDeleteModal(false);
+          }}
+          onDelete={() => {
+            deleteCustomer(userObject.id);
             setShowDeleteModal(false);
           }}
           event="Delete"

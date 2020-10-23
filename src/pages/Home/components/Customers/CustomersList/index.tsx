@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 
 import styles from './customerList.module.css';
 
@@ -63,16 +63,18 @@ const List: FC<ListProps> = ({
                 </div>
               </div>
             </td>
-            <td
-              className={clsx(
-                styles.rank,
-                identifyRank(customer.point) === 'Gold' && styles.gold,
-                identifyRank(customer.point) === 'Silver' && styles.silver,
-                identifyRank(customer.point) === 'Bronze' && styles.bronze,
-                identifyRank(customer.point) === 'Plastic' && styles.plastic,
-              )}
-            >
-              {identifyRank(customer.point)}
+            <td>
+              <p
+                className={clsx(
+                  styles.rankDetail,
+                  identifyRank(customer.points) === 'Gold' && styles.gold,
+                  identifyRank(customer.points) === 'Silver' && styles.silver,
+                  identifyRank(customer.points) === 'Bronze' && styles.bronze,
+                  identifyRank(customer.points) === 'Plastic' && styles.plastic,
+                )}
+              >
+                {identifyRank(customer.points)}
+              </p>
             </td>
             <td className={styles.point}>
               <p>{formatPoint(customer.points)}</p>
