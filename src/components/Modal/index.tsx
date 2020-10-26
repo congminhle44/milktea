@@ -10,14 +10,14 @@ interface PortalProps {
   error?: boolean;
   show?: any;
   onCancel?: any;
-  onCreate?: any;
+  onOK?: any;
   onDelete?: any;
 }
 
 export const Portal: FC<PortalProps> = ({
   header,
   onCancel,
-  onCreate,
+  onOK,
   onDelete,
   event,
   error,
@@ -41,7 +41,7 @@ export const Portal: FC<PortalProps> = ({
     <Modal
       onDelete={onDelete}
       onCancel={onCancel}
-      onCreate={onCreate}
+      onOK={onOK}
       header={header}
       error={error}
       event={event}

@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 
 import Button, {ButtonVariants} from '../../../../components/Button';
 
@@ -44,20 +44,16 @@ const Customer: FC<CustomersProps> = ({
 
   const [userObject, setUsertObject] = useState<any>({});
 
-  const [postUserObject, setPostUserObject] = useState<UserObject>({
-    name: '',
-    title: '',
-    points: 0,
-  });
-
   const handleTyping = (e: any) => {
     const {name, value} = e.target;
-    setPostUserObject((postUserObject) => ({...postUserObject, [name]: value}));
+    setUsertObject((userObject: object) => ({...userObject, [name]: value}));
   };
 
   const handleSubmitUser = () => {
     if (statusModal === 'create') {
-      createCustomer(postUserObject);
+      createCustomer(userObject);
+    } else {
+      editCustomers(userObject.id, userObject);
     }
     setShowAddModal(false);
   };
@@ -67,7 +63,7 @@ const Customer: FC<CustomersProps> = ({
       {showAddModal ? (
         <Portal
           event={statusModal === 'create' ? 'Create' : 'Edit'}
-          onCreate={() => {
+          onOK={() => {
             handleSubmitUser();
           }}
           onCancel={() => {
