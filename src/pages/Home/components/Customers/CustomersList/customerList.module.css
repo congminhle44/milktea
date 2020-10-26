@@ -2,10 +2,12 @@
   .tablet {
     display: none;
   }
+
   .rank,
   .point {
     display: none;
   }
+
   .loading {
     position: absolute;
     background-color: var(--white);
@@ -17,6 +19,7 @@
     border-collapse: collapse;
     position: relative;
   }
+
   .customerTable th {
     font-size: 0.75rem;
     line-height: calc(16 / 12);
@@ -24,6 +27,7 @@
     text-align: left;
     padding: 1.5rem 1rem;
   }
+
   .customerTable td {
     padding: 1rem;
   }
@@ -32,16 +36,23 @@
     text-align: center;
     width: 100%;
   }
+
   .listItem {
     border-top: 1px solid var(--default);
     cursor: pointer;
     transition: all 0.5s ease-out;
   }
+
   .listItem:hover {
     background-color: var(--default);
   }
+
   .listItem:last-child {
     border-bottom: 1px solid var(--default);
+  }
+
+  .rankDetail {
+    display: none;
   }
 
   .listInfo {
@@ -61,6 +72,7 @@
     color: #212121;
     font-family: 'Inter', sans-serif;
   }
+
   .infoContent {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -68,13 +80,29 @@
     font-family: 'Inter', sans-serif;
   }
 
-  .loadButton {
+  .page {
     width: 100%;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-top: 0.9375rem;
+  }
+
+  .pageDetail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 12rem;
+    float: right;
+  }
+
+  .pageNumber {
+    overflow: hidden;
+  }
+
+  .number:hover {
+    background-color: var(--default);
+  }
+
+  .clear {
+    clear: both;
   }
 }
 
@@ -87,6 +115,7 @@
     display: table-cell;
   }
   .rankDetail {
+    display: block;
     width: fit-content;
     padding: 0.5rem 1.1875rem;
     border-radius: 4px;

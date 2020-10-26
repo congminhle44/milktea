@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 
-import React, {FC, useEffect, useContext} from 'react';
+import React, {FC, useEffect, useContext, useState, useCallback} from 'react';
 
 import * as action from '../../Redux/Customers/action';
 
-import {connect} from 'react-redux';
+import {RootStateOrAny, useDispatch, useSelector} from 'react-redux';
 
 import Carousel from './components/Carousel/Carousel';
 
@@ -18,28 +18,59 @@ import ShowContext from '../../Context';
 
 import styles from './home.module.css';
 
-interface HomeProps {
-  customers?: [];
-  getCustomerList?: any;
-  loading?: boolean;
-  createCustomer?: any;
-  deleteCustomer?: any;
-  editCustomers?: any;
-}
+interface HomeProps {}
 
-const Home: FC<HomeProps> = ({
-  getCustomerList,
-  createCustomer,
-  deleteCustomer,
-  editCustomers,
-  customers,
-  loading,
-}) => {
+const Home: FC<HomeProps> = (props) => {
+  const [show] = useContext<any>(ShowContext);
+
+  let [page, setPage] = useState(1);
+
+  let [key, setKey] = useState<string>('');
+
+  const dispatch = useDispatch();
+
+  const customers = useSelector(
+    (state: RootStateOrAny) => state.customerReducer.customers,
+  );
+
+  const loading = useSelector(
+    (state: RootStateOrAny) => state.customerReducer.loading,
+  );
+
+  const maxPage = useSelector(
+    (state: RootStateOrAny) => state.customerReducer.page,
+  );
+
+  const searchList = useSelector(
+    (state: RootStateOrAny) => state.customerReducer.customersSearch,
+  );
+
+  const getCustomerList = useCallback(
+    () => dispatch(action.getCustomerList(page)),
+    [dispatch, page],
+  );
+
+  const searchCustomer = () => {
+    dispatch(action.searchCustomerList(key));
+  };
+
+  const createCustomer = (customerObj: object) =>
+    dispatch(action.createCustomers(customerObj));
+
+  const deleteCustomer = (id: number) => dispatch(action.deleteCustomers(id));
+
+  const editCustomers = (id: number, userObj: object) =>
+    dispatch(action.editCustomers(id, userObj));
+
   useEffect(() => {
     getCustomerList();
-  }, [getCustomerList()]);
+  }, [getCustomerList]);
 
-  const [show] = useContext<any>(ShowContext);
+  useEffect(() => {
+    searchCustomer();
+  }, [key]);
+
+  console.log(loading);
 
   return (
     <div className={clsx(styles.main, show && styles.menu)}>
@@ -50,40 +81,25 @@ const Home: FC<HomeProps> = ({
         image={<img src={imgMilktea} alt="MilkTea" />}
       />
       <Customer
+        page={maxPage}
+        currentPage={page}
+        searchKey={(key: string) => {
+          setKey(key);
+        }}
+        nextPage={() => {
+          setPage(page + 1);
+        }}
+        prevPage={() => {
+          setPage(page - 1);
+        }}
         editCustomers={editCustomers}
         deleteCustomer={deleteCustomer}
         createCustomer={createCustomer}
         loading={loading}
-        getCustomerList={customers}
+        getCustomerList={key === '' ? customers : searchList}
       />
     </div>
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  customers: state.customerReducer.customers,
-  loading: state.customerReducer.loading,
-  userObject: state.customerReducer.userObject,
-});
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    getCustomerList: () => {
-      dispatch(action.getCustomerList());
-    },
-
-    createCustomer: (customerObj: object) => {
-      dispatch(action.createCustomers(customerObj));
-    },
-
-    deleteCustomer: (id: number) => {
-      dispatch(action.deleteCustomers(id));
-    },
-
-    editCustomers: (id: number, userObj: object) => {
-      dispatch(action.editCustomers(id, userObj));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

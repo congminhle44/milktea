@@ -8,13 +8,13 @@ interface ModalProps {
   error?: boolean;
   show?: any;
   onCancel?: any;
-  onCreate?: any;
+  onOK?: any;
   onDelete?: any;
 }
 
 const Modal: FC<ModalProps> = ({
   onCancel,
-  onCreate,
+  onOK,
   onDelete,
   error,
   children,
@@ -35,7 +35,7 @@ const Modal: FC<ModalProps> = ({
             </Button>
             <div className={styles.eventButton}>
               <Button
-                onClick={onCreate || onDelete}
+                onClick={onOK || onDelete}
                 error={error}
                 variant={ButtonVariants.Small}
               >

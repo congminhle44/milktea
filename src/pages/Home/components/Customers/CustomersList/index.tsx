@@ -18,18 +18,27 @@ interface ListProps {
   setDeleteModal?: any;
   customers?: any;
   loading?: boolean;
+  page?: any;
+  prev?: any;
+  next?: any;
+  currentPage?: number;
 }
 
 const List: FC<ListProps> = ({
   customers,
+  currentPage,
+  prev,
+  next,
   setDeleteModal,
   setModal,
   loading,
   setUser,
+  page,
 }) => {
+  const _page = page ? page : '';
+
   const renderCustomerTableContent = () => {
     let isDbClick: boolean = false;
-
     if (customers) {
       return customers.map((customer: any, index: number) => {
         return (
@@ -102,10 +111,29 @@ const List: FC<ListProps> = ({
         ) : null}
         <tbody>{renderCustomerTableContent()}</tbody>
       </table>
-      <div className={styles.loadButton}>
-        <Button variant={ButtonVariants.Large}>
-          <p className={styles.loadContent}>Load more</p>
-        </Button>
+      <div className={styles.page}>
+        <div className={styles.pageDetail}>
+          <Button
+            disabled={_page.prev ? false : true}
+            onClick={() => {
+              prev();
+            }}
+            variant={ButtonVariants.Small}
+          >
+            Prev
+          </Button>
+          <div className={styles.pageNumber}>{currentPage}</div>
+          <Button
+            disabled={_page.next ? false : true}
+            onClick={() => {
+              next();
+            }}
+            variant={ButtonVariants.Small}
+          >
+            Next
+          </Button>
+        </div>
+        <div className={styles.clear}></div>
       </div>
     </div>
   );
