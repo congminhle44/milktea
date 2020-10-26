@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 
 import Button, {ButtonVariants} from '../../../../components/Button';
 
@@ -14,6 +14,7 @@ import styles from './customer.module.css';
 
 import formatPoints from '../../../../Helper/formatPoints';
 import identifyRank from '../../../../Helper/indentifyRank';
+import firstLetterUppercase from '../../../../Helper/firstLetterToUppercase';
 
 interface CustomersProps {
   getCustomerList?: any;
@@ -21,6 +22,11 @@ interface CustomersProps {
   deleteCustomer?: any;
   loading?: boolean;
   editCustomers?: any;
+  page?: any;
+  prevPage?: any;
+  nextPage?: any;
+  currentPage?: number;
+  searchKey?: any;
 }
 
 interface UserObject {
@@ -34,6 +40,11 @@ const Customer: FC<CustomersProps> = ({
   createCustomer,
   deleteCustomer,
   editCustomers,
+  searchKey,
+  prevPage,
+  nextPage,
+  currentPage,
+  page,
   loading,
 }) => {
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
@@ -56,6 +67,11 @@ const Customer: FC<CustomersProps> = ({
       editCustomers(userObject.id, userObject);
     }
     setShowAddModal(false);
+  };
+
+  const handleSearch = (e: any) => {
+    const {value} = e.target;
+    searchKey(firstLetterUppercase(value));
   };
 
   return (
@@ -144,7 +160,12 @@ const Customer: FC<CustomersProps> = ({
       ) : null}
       <div className={styles.customerEvent}>
         <div className={styles.searchCustomers}>
-          <Input search border={false} placeholder="Search for customers" />
+          <Input
+            onChange={handleSearch}
+            search
+            border={false}
+            placeholder="Search for customers"
+          />
         </div>
         <div className={styles.addButton}>
           <Button
@@ -163,6 +184,14 @@ const Customer: FC<CustomersProps> = ({
       <div className={styles.customerList}>
         <List
           loading={loading}
+          page={page}
+          currentPage={currentPage}
+          next={() => {
+            nextPage();
+          }}
+          prev={() => {
+            prevPage();
+          }}
           customers={getCustomerList}
           setModal={() => {
             setStatusModal('edit');
