@@ -11,9 +11,8 @@ let initialState = {
 const customerReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case ActionTypes.GET_USER_LIST:
-      state.customers = action.customers;
       state.loading = action.loading;
-      return {...state};
+      return {...state, customers: [...state.customers, ...action.customers]};
 
     case ActionTypes.GET_LAST_PAGE:
       state.page = action.page;

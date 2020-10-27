@@ -1,10 +1,8 @@
 import clsx from 'clsx';
 
-import React, {FC} from 'react';
+import React, {FC, useCallback, useRef} from 'react';
 
 import styles from './customerList.module.css';
-
-import Button, {ButtonVariants} from '../../../../../components/Button';
 
 import formatPoint from '../../../../../Helper/formatPoints';
 
@@ -26,8 +24,8 @@ interface ListProps {
 
 const List: FC<ListProps> = ({
   customers,
-  currentPage,
-  prev,
+  // currentPage,
+  // prev,
   next,
   setDeleteModal,
   setModal,
@@ -37,12 +35,38 @@ const List: FC<ListProps> = ({
 }) => {
   const _page = page ? page : '';
 
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 1.0,
+  };
+
+  const observer: any = useRef();
+
+  const lastCustomerElement = useCallback(
+    (node: any) => {
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          next();
+        }
+      }, options);
+      if (node) observer.current.observe(node);
+    },
+    [observer, customers],
+  );
+
   const renderCustomerTableContent = () => {
     let isDbClick: boolean = false;
     if (customers) {
       return customers.map((customer: any, index: number) => {
         return (
           <tr
+            ref={
+              customers.length === index + 1 && _page.next
+                ? lastCustomerElement
+                : null
+            }
             onClick={() => {
               setTimeout(() => {
                 if (isDbClick === false) {
@@ -111,7 +135,7 @@ const List: FC<ListProps> = ({
         ) : null}
         <tbody>{renderCustomerTableContent()}</tbody>
       </table>
-      <div className={styles.page}>
+      {/* <div className={styles.page}>
         <div className={styles.pageDetail}>
           <Button
             disabled={_page.prev ? false : true}
@@ -134,7 +158,7 @@ const List: FC<ListProps> = ({
           </Button>
         </div>
         <div className={styles.clear}></div>
-      </div>
+      </div> */}
     </div>
   );
 };
