@@ -8,18 +8,15 @@ let parse = require('../../../node_modules/parse-link-header');
 
 export const getCustomerList = (page: number) => {
   return async (dispatch: any) => {
+    dispatch({
+      type: ActionTypes.REQUEST,
+    });
     try {
-      const _customers = await api.get(`${customers}?_page=${page}&_limit=3`);
-
+      const payload = await api.get(`${customers}?_page=${page}&_limit=3`);
       dispatch({
-        type: ActionTypes.GET_USER_LIST,
-        loading: false,
-        customers: _customers.data,
-      });
-
-      dispatch({
-        type: ActionTypes.GET_LAST_PAGE,
-        page: parse(_customers.headers.link),
+        type: ActionTypes.GET_USER,
+        payload: payload.data,
+        page: parse(payload.headers.link),
       });
     } catch (err) {
       return err;
@@ -29,12 +26,14 @@ export const getCustomerList = (page: number) => {
 
 export const searchCustomerList = (searchKey: string) => {
   return async (dispatch: any) => {
+    dispatch({
+      type: ActionTypes.REQUEST,
+    });
     try {
-      const _customers = await api.get(`${customers}?name=${searchKey}`);
+      const payload = await api.get(`${customers}?name=${searchKey}`);
       dispatch({
-        type: ActionTypes.GET_USER_SEARCH,
-        loading: false,
-        customersSearch: _customers.data,
+        type: ActionTypes.SEARCH_USER,
+        customersSearch: payload.data,
       });
     } catch (err) {
       return err;
@@ -44,11 +43,31 @@ export const searchCustomerList = (searchKey: string) => {
 
 export const createCustomers = (userObject: object) => {
   return async (dispatch: any) => {
+    dispatch({
+      type: ActionTypes.REQUEST,
+    });
     try {
-      const _customers = await api.post(customers, userObject);
+      const payload = await api.post(customers, userObject);
       dispatch({
         type: ActionTypes.CREATE_USER,
-        userObject: _customers.data,
+        payload: payload.data,
+      });
+    } catch (err) {
+      return err;
+    }
+  };
+};
+
+export const editCustomers = (id: number, userObj: object) => {
+  return async (dispatch: any) => {
+    dispatch({
+      type: ActionTypes.REQUEST,
+    });
+    try {
+      const payload = await api.put(`${customers}/${id}`, userObj);
+      dispatch({
+        type: ActionTypes.EDIT_USER,
+        payload: payload.data,
       });
     } catch (err) {
       return err;
@@ -58,18 +77,16 @@ export const createCustomers = (userObject: object) => {
 
 export const deleteCustomers = (id: number) => {
   return async (dispatch: any) => {
+    dispatch({
+      type: ActionTypes.REQUEST,
+    });
     try {
-      await api.delete(`${customers}/${id}`);
-    } catch (err) {
-      return err;
-    }
-  };
-};
-
-export const editCustomers = (id: number, userObj: object) => {
-  return async (dispatch: any) => {
-    try {
-      await api.put(`${customers}/${id}`, userObj);
+      const payload = await api.delete(`${customers}/${id}`);
+      console.log(payload.data);
+      dispatch({
+        type: ActionTypes.DELETE_USER,
+        payload: payload.data,
+      });
     } catch (err) {
       return err;
     }

@@ -71,7 +71,7 @@ const Customer: FC<CustomersProps> = ({
 
   const handleSearch = (e: any) => {
     const {value} = e.target;
-    searchKey(firstLetterUppercase(value));
+    searchKey(value);
   };
 
   return (

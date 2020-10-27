@@ -29,8 +29,8 @@ const Home: FC<HomeProps> = (props) => {
 
   const dispatch = useDispatch();
 
-  const customers = useSelector(
-    (state: RootStateOrAny) => state.customerReducer.customers,
+  const payload = useSelector(
+    (state: RootStateOrAny) => state.customerReducer.payload,
   );
 
   const loading = useSelector(
@@ -95,7 +95,7 @@ const Home: FC<HomeProps> = (props) => {
         deleteCustomer={deleteCustomer}
         createCustomer={createCustomer}
         loading={loading}
-        getCustomerList={key === '' ? customers : searchList}
+        getCustomerList={key === '' ? payload : searchList}
       />
     </div>
   );

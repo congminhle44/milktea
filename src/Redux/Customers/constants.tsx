@@ -1,5 +1,6 @@
-export const GET_USER_LIST = 'GET_USER_LIST';
-export const GET_USER_SEARCH = 'GET_USER_SEARCH';
-export const LOADING = 'LOADING';
-export const GET_LAST_PAGE = 'GET_LAST_PAGE';
-export const CREATE_USER = 'CREATE_USER_STATUS';
+export const REQUEST = 'REQUEST';
+export const GET_USER = 'GET_USER';
+export const CREATE_USER = 'CREATE_USER';
+export const EDIT_USER = 'EDIT_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const SEARCH_USER = 'SEARCH_USER';

@@ -9,6 +9,7 @@ import formatPoint from '../../../../../Helper/formatPoints';
 import {Loading} from '../../../../../components/Loading';
 
 import identifyRank from '../../../../../Helper/indentifyRank';
+import firstLetterUppercase from '../../../../../Helper/firstLetterToUppercase';
 
 interface ListProps {
   setModal?: any;
@@ -69,9 +70,9 @@ const List: FC<ListProps> = ({
             }
             onClick={() => {
               setTimeout(() => {
+                setUser(customer);
                 if (isDbClick === false) {
                   setModal();
-                  setUser(customer);
                 }
               }, 200);
             }}
@@ -91,7 +92,9 @@ const List: FC<ListProps> = ({
                   alt="user"
                 />
                 <div className={styles.info}>
-                  <h5 className={styles.infoTitle}>{customer.name}</h5>
+                  <h5 className={styles.infoTitle}>
+                    {firstLetterUppercase(customer.name)}
+                  </h5>
                   <p className={styles.infoContent}>{customer.title}</p>
                 </div>
               </div>
@@ -128,12 +131,12 @@ const List: FC<ListProps> = ({
             <th className={styles.tablet}>Points</th>
           </tr>
         </thead>
+        <tbody>{renderCustomerTableContent()}</tbody>
         {loading ? (
           <div className={styles.loading}>
             <Loading />
           </div>
         ) : null}
-        <tbody>{renderCustomerTableContent()}</tbody>
       </table>
       {/* <div className={styles.page}>
         <div className={styles.pageDetail}>
