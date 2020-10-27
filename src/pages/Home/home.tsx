@@ -50,9 +50,10 @@ const Home: FC<HomeProps> = (props) => {
     [dispatch, page],
   );
 
-  const searchCustomer = () => {
-    dispatch(action.searchCustomerList(key));
-  };
+  const searchCustomer = useCallback(
+    () => dispatch(action.searchCustomerList(key)),
+    [dispatch, key],
+  );
 
   const createCustomer = (customerObj: object) =>
     dispatch(action.createCustomers(customerObj));
@@ -68,9 +69,7 @@ const Home: FC<HomeProps> = (props) => {
 
   useEffect(() => {
     searchCustomer();
-  }, [key]);
-
-  console.log(loading);
+  }, [key, searchCustomer]);
 
   return (
     <div className={clsx(styles.main, show && styles.menu)}>
