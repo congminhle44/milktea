@@ -99,7 +99,7 @@ const List: FC<ListProps> = ({
                 </div>
               </div>
             </td>
-            <td>
+            <td className={styles.rankContent}>
               <p
                 className={clsx(
                   styles.rankDetail,
