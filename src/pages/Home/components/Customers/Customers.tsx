@@ -14,7 +14,6 @@ import styles from './customer.module.css';
 
 import formatPoints from '../../../../Helper/formatPoints';
 import identifyRank from '../../../../Helper/indentifyRank';
-import firstLetterUppercase from '../../../../Helper/firstLetterToUppercase';
 
 interface CustomersProps {
   getCustomerList?: any;
@@ -71,7 +70,7 @@ const Customer: FC<CustomersProps> = ({
 
   const handleSearch = (e: any) => {
     const {value} = e.target;
-    searchKey(firstLetterUppercase(value));
+    searchKey(value);
   };
 
   return (
