@@ -114,12 +114,14 @@
   .point {
     display: table-cell;
   }
+  .rankContent {
+    width: 80px;
+  }
   .rankDetail {
     display: block;
     width: fit-content;
     padding: 0.5rem 1.1875rem;
     border-radius: 4px;
-    width: 80px;
     text-align: center;
   }
   .rankDetail.silver {
