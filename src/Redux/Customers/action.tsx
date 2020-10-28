@@ -85,7 +85,7 @@ export const deleteCustomers = (id: number) => {
       console.log(payload.data);
       dispatch({
         type: ActionTypes.DELETE_USER,
-        payload: payload.data,
+        payload: id,
       });
     } catch (err) {
       return err;

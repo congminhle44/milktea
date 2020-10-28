@@ -36,11 +36,31 @@ const customerReducer = (state = initialState, action: any) => {
       };
 
     case ActionTypes.EDIT_USER:
+      const newCustomer = state.payload.map((customer: any, index: number) => {
+        if (customer.id === action.payload.id) {
+          return {
+            ...customer,
+            name: action.payload.name,
+            title: action.payload.title,
+            points: action.payload.points,
+          };
+        }
+        return customer;
+      });
       return {
         ...state,
+        payload: newCustomer,
         loading: false,
       };
     case ActionTypes.DELETE_USER:
+      let position = -1;
+      state.payload.map((customer: any, index: number) => {
+        if (customer.id === action.payload) {
+          position = index;
+        }
+        return position;
+      });
+      state.payload.splice(position, 1);
       return {
         ...state,
         loading: false,
