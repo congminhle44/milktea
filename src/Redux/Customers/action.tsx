@@ -82,7 +82,6 @@ export const deleteCustomers = (id: number) => {
     });
     try {
       const payload = await api.delete(`${customers}/${id}`);
-      console.log(payload.data);
       dispatch({
         type: ActionTypes.DELETE_USER,
         payload: id,
